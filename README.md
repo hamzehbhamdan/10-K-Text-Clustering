@@ -104,7 +104,7 @@ Perhaps a more feasible first step would be to include more data sources for com
 
 
 <!-- Footnotes themselves at the bottom. -->
-## Notes
+### Citations
 
 [^1]:
      Gan, T. (2019, April 16). Linking 10-K and the GICS - through Experiments of Text Classification and Clustering. UC Berkeley. https://cdar.berkeley.edu/sites/default/files/tgan190416risk.pdf
