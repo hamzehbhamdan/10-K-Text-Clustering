@@ -52,7 +52,9 @@ cosine_similarity_matrix = model.plotCosineSimilaryHeatmap(embeddings=reduced_em
 results = model.proximityValidation(embeddings=reduced_embeddings, labels=labels, threshold=threshold_value)['accuracy'] # Returns accuracy from proximity validation for some threshold_value
 ```
 **Results**
-![](longer_test/cosine_similarity.png?raw=true)
+<img src="longer_test/visualize_clusters.png?raw=true" alt="Visualize Clusters" width="80%" />
+<img src="longer_test/cosine_similarity.png?raw=true" alt="Cosine Similarity" width="80%" />
+<img src="longer_test/cosine_similarity_threshold05.png?raw=true" alt="Cosine Similarity with Threshold 0.5" width="80%" />
 
 # **Project Motivation**
 
