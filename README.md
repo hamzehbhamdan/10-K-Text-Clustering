@@ -25,7 +25,7 @@ A toolkit that allows users to run their own text-clustering models on a select 
     *  Proximity validation accuracy
 
 **Example Usage**
-'''python
+```python 
 tickers = ['AAPL', 'MSFT', 'GOOGL', 'INTC', 'JPM', 'GS', 'C', 'MS', 'XOM', 'CVX', 'COP', 'PG', 'KO', 'PEP', 'NKE'] # Tickers to include
 
 sections = ['1', '1A'] # Sections to include in 10-K filings; 1: Business Description, 1A: Risk Factors.
@@ -50,7 +50,7 @@ model.visualizeClusters(cluster_data=clustered_data, reduced_embeddings=reduced_
 cosine_similarity_matrix = model.plotCosineSimilaryHeatmap(embeddings=reduced_embeddings, labels=tickers, save_file_path='cosine_similarity.png') # Plot cosine similarity heatmap, save image as 'cosine_similarity.png', and save matrix as a variable called 'cosine_similarity_matrix' (optional to save, only used for external analysis)
 
 resutls = model.proximityValidation(embeddings=reduced_embeddings, labels=labels, threshold=threshold_value)['accuracy'] # Returns accuracy from proximity validation for some threshold_value
-'''
+```
 
 # **Project Motivation**
 
