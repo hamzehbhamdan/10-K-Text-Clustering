@@ -49,7 +49,7 @@ model.visualizeClusters(cluster_data=clustered_data, reduced_embeddings=reduced_
 
 cosine_similarity_matrix = model.plotCosineSimilaryHeatmap(embeddings=reduced_embeddings, labels=tickers, save_file_path='cosine_similarity.png') # Plot cosine similarity heatmap, save image as 'cosine_similarity.png', and save matrix as a variable called 'cosine_similarity_matrix' (optional to save, only used for external analysis)
 
-resutls = model.proximityValidation(embeddings=reduced_embeddings, labels=labels, threshold=threshold_value)['accuracy'] # Returns accuracy from proximity validation for some threshold_value
+results = model.proximityValidation(embeddings=reduced_embeddings, labels=labels, threshold=threshold_value)['accuracy'] # Returns accuracy from proximity validation for some threshold_value
 ```
 
 # **Project Motivation**
