@@ -26,7 +26,7 @@ A toolkit that allows users to run their own text-clustering models on a select 
 
 **Example Usage**
 ```python 
-tickers = ['AAPL', 'MSFT', 'GOOGL', 'INTC', 'JPM', 'GS', 'C', 'MS', 'XOM', 'CVX', 'COP', 'PG', 'KO', 'PEP', 'NKE'] # Tickers to include
+tickers = ['CMCSA', 'DIS', 'CHTR', 'COP', 'XOM', 'CVX', 'GS', 'MS', 'BAC', 'WFC', 'SBUX', 'MCD', 'AAPL', 'MSFT', 'GOOG', 'FB', 'NVDA', 'INTC', 'LLY', 'JNJ', 'PFE', 'NEE', 'DUK', 'SO'] # Tickers to include
 
 sections = ['1', '1A'] # Sections to include in 10-K filings; 1: Business Description, 1A: Risk Factors.
 
@@ -51,6 +51,8 @@ cosine_similarity_matrix = model.plotCosineSimilaryHeatmap(embeddings=reduced_em
 
 results = model.proximityValidation(embeddings=reduced_embeddings, labels=labels, threshold=threshold_value)['accuracy'] # Returns accuracy from proximity validation for some threshold_value
 ```
+**Results**
+![image](files:/longer_test/cosine_similarity.png)
 
 # **Project Motivation**
 
