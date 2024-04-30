@@ -1,5 +1,5 @@
 # **10-K-Text-Clustering**
-#### *Should you have any questions or suggestions, please email me at hamzehhamdan@college.harvard.edu.*
+###### *Should you have any questions or suggestions, please email me at hamzehhamdan@college.harvard.edu.*
 A toolkit that allows users to run their own text-clustering models on a select set of companies' 10-K filings.
 
 # **Usage**
