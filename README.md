@@ -74,7 +74,7 @@ The embeddings from the tickers above are shown here:
 
 More interestingly, here were the cosine similarities. Note that the company tickers were grouped by similarity (read note below on selection of similarity). When filtering for companies with a cosine similarity above 0.5, we note that 80% of the results are within similar companies, with a total of 10 points. Decreasing this threshold to 0.4 increased the total points to 14, but decreased the accuracy to 78.6%. Generally, decreasing the threshold gives lower overall accuracy.
 
-*Note that companies were selected to show a small set of industries. Companies that are popular were informally prioritized, as this is used for demonstration purposes and widespread knowledge of companies is important. Company selection was also inspired by [this](https://www.nebula-graph.io/posts/stock-interrelation-analysis-nebula-graph-machine-learning) project on graphing company similarity using time series analysis correlations.*
+*Note that companies were selected to show a small set of industries. Companies that are popular were informally prioritized, as this is used for demonstration purposes and widespread knowledge of companies is important. Company selection was also inspired by a project on graphing company similarity using time series analysis correlations.[^4]*
 
 <img src="longer_test/cosine_similarity.png?raw=true" alt="Cosine Similarity" width="60%" />
 <img src="longer_test/cosine_similarity_threshold05.png?raw=true" alt="Cosine Similarity with Threshold 0.5" width="60%" />
@@ -116,3 +116,6 @@ Perhaps a more feasible first step would be to include more data sources for com
 
 [^3]:
      Andreou, P.C., Harris, T. and Philip, D. (2020), Measuring Firms’ Market Orientation Using Textual Analysis of 10-K Filings. Brit J Manage, 31: 872-895. https://doi.org/10.1111/1467-8551.12391
+
+[^4]:
+     Jude, Wang Jie. (2020), Exploring the S&P 100 Index Stocks Using Graph Machine Learning. Nebula Graph. https://www.nebula-graph.io/posts/stock-interrelation-analysis-nebula-graph-machine-learning
