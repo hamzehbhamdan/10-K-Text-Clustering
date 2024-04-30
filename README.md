@@ -2,6 +2,20 @@
 A toolkit that allows users to run their own text-clustering models on a select set of companies' 10-K filings.
 ###### *Should you have any questions or suggestions, please email me at hamzehhamdan@college.harvard.edu.*
 
+# **Project Motivation**
+
+While the capabilities of natural language processing are growing in their ability to model the complexities of verbal communication and text, the use of textual analysis in empirical finance is very limited, and typically only occurs in studying the “sentiment” of a text. 
+
+As the main focus lies on a sentiment analysis, there has been little exploration into using text-based clustering based on 10-K filings. A simple search on GitHub would return several projects on 10-K sentiment analysis stability, but none on text-clustering.
+
+The purpose of this project is to provide a tool that allows users to find similar companies to a select company given its 10-K filings. They will be able to run their own clustering model on a select set of companies. I am also considering including a pretrained model with a lot of different companies’ data, but am unsure if that would be inefficient / not very feasible (I’d love your opinion on this front, if possible). 
+
+Additionally, as the data is retrieved, users will be able to specify what portion of the 10-K filings to include / exclude. This can allow for larger control over what the similarities will be based on (i.e. a risk analysis can be made by including only the risk factors section, and any other relevant sections).
+
+The motivation behind this project is rooted in the largely untapped usage of NLPs beyond sentiment analysis. I hope that this approach can uncover nuanced patterns and similarities between companies that are not apparent through traditional numerical data analysis alone.
+
+Please reference the next section on technical steps to understand more about this tool and how it will work.
+
 # **Usage**
 * **Pipeline**:
     * Retreive financial data from EDGAR API using retrieveFinancialData
@@ -25,7 +39,7 @@ A toolkit that allows users to run their own text-clustering models on a select 
     *  Cosine similarity heatmap
     *  Proximity validation accuracy
 
-**Example Usage**
+## **Example Usage**
 ```python 
 tickers = ['CMCSA', 'DIS', 'CHTR', 'COP', 'XOM', 'CVX', 'GS', 'MS', 'BAC', 'WFC', 'SBUX', 'MCD', 'AAPL', 'MSFT', 'GOOG', 'FB', 'NVDA', 'INTC', 'LLY', 'JNJ', 'PFE', 'NEE', 'DUK', 'SO'] # Tickers to include
 
@@ -52,7 +66,7 @@ cosine_similarity_matrix = model.plotCosineSimilaryHeatmap(embeddings=reduced_em
 
 results = model.proximityValidation(embeddings=reduced_embeddings, labels=labels, threshold=threshold_value)['accuracy'] # Returns accuracy from proximity validation for some threshold_value
 ```
-**Results**
+## **Results**
 
 The embeddings from the tickers above are shown here:
 
@@ -65,23 +79,8 @@ More interestingly, here were the cosine similarities. Note that the company tic
 <img src="longer_test/cosine_similarity.png?raw=true" alt="Cosine Similarity" width="60%" />
 <img src="longer_test/cosine_similarity_threshold05.png?raw=true" alt="Cosine Similarity with Threshold 0.5" width="60%" />
 
-# **Project Motivation**
 
-While the capabilities of natural language processing are growing in their ability to model the complexities of verbal communication and text, the use of textual analysis in empirical finance is very limited, and typically only occurs in studying the “sentiment” of a text. 
-
-As the main focus lies on a sentiment analysis, there has been little exploration into using text-based clustering based on 10-K filings. A simple search on GitHub would return several projects on 10-K sentiment analysis stability, but none on text-clustering.
-
-The purpose of this project is to provide a tool that allows users to find similar companies to a select company given its 10-K filings. They will be able to run their own clustering model on a select set of companies. I am also considering including a pretrained model with a lot of different companies’ data, but am unsure if that would be inefficient / not very feasible (I’d love your opinion on this front, if possible). 
-
-Additionally, as the data is retrieved, users will be able to specify what portion of the 10-K filings to include / exclude. This can allow for larger control over what the similarities will be based on (i.e. a risk analysis can be made by including only the risk factors section, and any other relevant sections).
-
-The motivation behind this project is rooted in the largely untapped usage of NLPs beyond sentiment analysis. I hope that this approach can uncover nuanced patterns and similarities between companies that are not apparent through traditional numerical data analysis alone.
-
-Please reference the next section on technical steps to understand more about this tool and how it will work.
-
-# **Software Usage**
-
-Example usage:
+# **Use Cases**
 
 * Using this tool to identify clusters of similar companies based on their 10-K filings, a user might uncover underlying themes or strategies not immediately apparent through traditional financial analysis. Looking at similar companies within a cluster might reveal some important information about competitors and potential opportunities for collaboration. Recall that as the data is retrieved, users can specify what portion of the 10-K filings to include / exclude, allowing for larger control over what the similarities will be based on (i.e. a risk analysis can be made by including only the risk factors section, and any other relevant sections).
 * Researchers can use this tool to study trends and segment industries or markets into subsections. Read more about how this tool could have been used in established studies in the following section.
