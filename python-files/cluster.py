@@ -7,6 +7,9 @@ import pandas as pd
 from ratelimiter import RateLimiter
 from edgar import *
 
+from dotenv import load_dotenv
+import os
+
 from sec_api import ExtractorApi
 import re
 from html import unescape
@@ -495,8 +498,8 @@ sections = ['1', '1A']
 n_clusters = 10
 
 print('Initializing model.')
-model = AnnualFilingCluster('hamzehhamdan@college.harvard.edu')
-sec_api_key = '5d47cc711eb441b212b8c1bcf52e2a234191c9816b2d955b30abca4ab2b2d7e9'
+model = AnnualFilingCluster(os.getenv('EDGAR_HEADER'))
+sec_api_key = os.getenv('SEC_API_KEY')
 
 #print('Getting quant data.')
 #quant_data = model.retrieveFinancialData(tickers)
