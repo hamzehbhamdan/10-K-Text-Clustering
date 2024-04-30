@@ -52,7 +52,7 @@ cosine_similarity_matrix = model.plotCosineSimilaryHeatmap(embeddings=reduced_em
 results = model.proximityValidation(embeddings=reduced_embeddings, labels=labels, threshold=threshold_value)['accuracy'] # Returns accuracy from proximity validation for some threshold_value
 ```
 **Results**
-![image](https://github.com/hamzehbhamdan/10-K-Text-Clustering/blob/main/longer_test/clustered_data.csv)
+![](longer_test/cosine_similarity.png?raw=true)
 
 # **Project Motivation**
 
