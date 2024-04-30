@@ -25,7 +25,7 @@ A toolkit that allows users to run their own text-clustering models on a select 
     *  Proximity validation accuracy
 
 **Example Usage**
-'''
+'''python
 tickers = ['AAPL', 'MSFT', 'GOOGL', 'INTC', 'JPM', 'GS', 'C', 'MS', 'XOM', 'CVX', 'COP', 'PG', 'KO', 'PEP', 'NKE'] # Tickers to include
 
 sections = ['1', '1A'] # Sections to include in 10-K filings; 1: Business Description, 1A: Risk Factors.
