@@ -1,6 +1,56 @@
 # **10-K-Text-Clustering**
 A toolkit that allows users to run their own text-clustering models on a select set of companies' 10-K filings.
 
+# **Usage**
+* **Pipeline**:
+    * Retreive financial data from EDGAR API using retrieveFinancialData
+    * Retreive text data from sec-api.io using retreiveTextData
+    * Preprocess data using preprocessData
+    * Tokenize data using tokenizeData using SEC BERT Shape
+    * Embed data using embedData using SEC BERT Shape
+    * Cluster data using Kmeans or HBDSCAN (optional, should run for reduced embeddings required for remaining steps)
+    * Visualize clusters using t-SNE and UMAP
+    * Plot a cosine similarity heatmap for validation
+    * If you have labels, find proximity validation accuracy 
+* **Requirements**:
+    * 1) EDGAR_HEADER, 2) SEC_API_KEY in .env file represent 1) the email address (not necessarily registered) used for the SEC EDGAR databse data requests, and 2) the api request from sec-api.io.
+    * List of tickers for main functions.
+    * List of sections to include from 10-K filings.
+    * List of labels for proximity validation (optional).
+* **Returns**:
+    *  Dataframes with processed text, tokens, and embeddings
+    *  Structured quantitative data usign SEC's EDGAR API
+    *  Embedding visualization with t-SNE and/or UMAP
+    *  Cosine similarity heatmap
+    *  Proximity validation accuracy
+
+**Example Usage**
+'''
+tickers = ['AAPL', 'MSFT', 'GOOGL', 'INTC', 'JPM', 'GS', 'C', 'MS', 'XOM', 'CVX', 'COP', 'PG', 'KO', 'PEP', 'NKE'] # Tickers to include
+
+sections = ['1', '1A'] # Sections to include in 10-K filings; 1: Business Description, 1A: Risk Factors.
+
+model = AnnualFilingCluster(os.getenv('EDGAR_HEADER')) # Initializing the model
+sec_api_key = os.getenv('SEC_API_KEY') # Your sec-api.io API key
+
+quant_data = model.retrieveFinancialData(tickers) # Optional, retreived quant data for extra analysis
+
+text_data = model.retreiveTextData(tickers=tickers, sections=sections, years_back=1, sec_api_key=sec_api_key) # Retreive text data
+
+tickers = model.tickers # Update tickers list; previous method deletes tickers that were not registered with the SEC (check your inputs) 
+labels # Update your labels too, if applicable
+
+processed_data = model.preprocessData(df=text_data, SECBERT=True) # Process data
+tokenized_data = model.tokenizeData(processed_data=processed_data, SECBERT=True) # Tokenize data
+embedded_data = model.embedData(tokenized_data=tokenized_data, col_embeddings=True) # Embed data
+clustered_data, reduced_embeddings = model.clusterData(embedded_data=embedded_data, model_type='KMeans', KMEANS_n_clusters=n_clusters, random_seed=109) # Cluster data
+
+model.visualizeClusters(cluster_data=clustered_data, reduced_embeddings=reduced_embeddings, save_file_path='visualize_clusters.png') # Visualize clusters and save image as 'visualize_clusters.png'
+
+cosine_similarity_matrix = model.plotCosineSimilaryHeatmap(embeddings=reduced_embeddings, labels=tickers, save_file_path='cosine_similarity.png') # Plot cosine similarity heatmap, save image as 'cosine_similarity.png', and save matrix as a variable called 'cosine_similarity_matrix' (optional to save, only used for external analysis)
+
+resutls = model.proximityValidation(embeddings=reduced_embeddings, labels=labels, threshold=threshold_value)['accuracy'] # Returns accuracy from proximity validation for some threshold_value
+'''
 
 # **Project Motivation**
 
@@ -15,66 +65,6 @@ Additionally, as the data is retrieved, users will be able to specify what porti
 The motivation behind this project is rooted in the largely untapped usage of NLPs beyond sentiment analysis. I hope that this approach can uncover nuanced patterns and similarities between companies that are not apparent through traditional numerical data analysis alone.
 
 Please reference the next section on technical steps to understand more about this tool and how it will work.
-
-
-# **Technical Steps**
-
-Organizationally, this project will be publicly available on GitHub and will be published on PyPI, the standard location for Python package publication. Additionally, I will clearly document all external dependencies with their versions to avoid conflicts, using either pipenv or conda for environment management. I will also likely add some form of feedback form, as I plan to update this library and potentially build on it with GNNs (outside of the scope of this class, likely to be done over the summer).
-
-As for my developmental steps, I will first create the documentation for the methods, implement a few tests for the repository, and set up a README file that I will update with usage as I work on the project. Once I have the entire repository set up, I will start with my coding of the actual project. The code will be one Python class with several methods, outlined below.
-
-Rough Outline of Methods:
-
-* retrieveData
-    * Purpose: Fetches the 10-K filing documents for a given list of companies by their legal names. This method uses the SEC’s EDGAR database API.
-    * Input:
-        * names: a list of strings representing the legal company names
-        * exclude / include: specify what category of data to include or exclude (e.g. risk category)
-    * Output:
-        * 10-K data: a dictionary or structured data format where the key is the company name and value is the text content of the 10-K filing
-* preprocessData
-    * Purpose: Cleans and prepares the 10-K filings text for analysis.
-    * Input:
-        * data: the raw text data of 10-K filings
-    * Output:
-        * processed_data: preprocessed text data, ready for vectorization and clustering. This will likely include stemming, removal of stopwords, and other normalization steps.
-* vectorizeData
-    * Purpose: Converts preprocessed text data into a numerical format that can be used for the cluster analysis. This will likely use either TF-IDF vectors or, most likely, a version of BERT.
-    * Input:
-        * processed_data: preprocessed 10-K filings text data
-    * Output:
-        * vectors: a numerical representation of the text data, suitable for clustering
-* trainModel
-    * Purpose: Trains a new model based on a subset of 10-K filing data to cluster companies into groups based on textual similarities.
-    * Input:
-        * vectors: numerical representations of the companies’ 10-K filings
-        * clusters: an integer specifying the number of clusters to form
-        * type: type of model to train
-    * Output:
-        * model: a trained text-clustering model
-        * cluster_labels: labels indicating the cluster each company belongs to
-* loadModel
-    * Purpose: loads a pre-trained clustering model, allowing for quick classification of new companies into existing clusters.
-    * Input:
-        * model_path: path to the saved model file
-    * Output:
-        * Model: a loaded text-clustering model ready to be used
-* findNearestCluster
-    * Purpose: finds the nearest cluster for a new company based on its 10-K filing, using a pre-trained model.
-    * Input:
-        * model: a trained text-clustering model
-        * 10-K data: the 10-K filing text of a new company
-    * Output:
-        * cluster: the cluster to which the company is most similar
-        * similar_companies: a list of companies in the identified cluster
-* visualizeClusters
-    * Purpose: generates a visual representation of the clustered companies.
-    * Input:
-        * cluster_labels: labels indicating the cluster each company belongs to
-        * vectors: numerical representations of the companies’ 10-K filings
-    * Output:
-        * a plot showing the clusters of companies, which can help in understanding the distribution and relationships among them.
-
 
 # **Software Usage**
 
