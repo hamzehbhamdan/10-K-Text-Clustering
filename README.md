@@ -28,7 +28,9 @@ Please reference the next section on technical steps to understand more about th
     * Plot a cosine similarity heatmap for validation
     * If you have labels, find proximity validation accuracy 
 * **Requirements**:
-    * 1) EDGAR_HEADER, 2) SEC_API_KEY in .env file represent 1) the email address (not necessarily registered) used for the SEC EDGAR databse data requests, and 2) the api request from sec-api.io.
+    * In the .env file:
+         1) EDGAR_HEADER: the email address (not necessarily registered) used for the SEC EDGAR databse data requests
+         2) SEC_API_KEY: the api request from sec-api.io
     * List of tickers for main functions.
     * List of sections to include from 10-K filings.
     * List of labels for proximity validation (optional).
