@@ -1,5 +1,7 @@
 # **10-K-Text-Clustering**
 A toolkit that allows users to run their own text-clustering models on a select set of companies' 10-K filings.
+
+View the demo [here](https://10k-filings-analysis.streamlit.app/).
 ###### *Should you have any questions or suggestions, please email me at hamzehhamdan@college.harvard.edu.*
 
 # **Project Motivation**
